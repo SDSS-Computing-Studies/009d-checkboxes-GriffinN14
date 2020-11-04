@@ -18,6 +18,7 @@ def updateCheck():
     # of the checkbox variable state
     e1.delete(0,tk.END)
     e1.insert(0, state.get())
+    print(state)
 
 # Creates a Checkbutton in the "win" window.  There is text as well as a variable
 # that will match the current variable state as well as a command to be run every
