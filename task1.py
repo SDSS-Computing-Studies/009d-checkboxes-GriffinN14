@@ -35,10 +35,25 @@ entered = StringVar()
 def binary_to_decimal(binary):
     # binary is a tuple of length 8
     # return value is an integer decimal
-
-
-    pass
-    #return decimal 
+    decimal = 0
+    if binary[0] == 1:
+        decimal = decimal + 128
+    if binary[1] == 1:
+        decimal = decimal + 64
+    if binary[2] == 1:
+        decimal = decimal + 32
+    if binary[3] == 1:
+        decimal = decimal + 16
+    if binary[4] == 1:
+        decimal = decimal + 8
+    if binary[5] == 1:
+        decimal = decimal + 4
+    if binary[6] == 1:
+        decimal = decimal + 2
+    if binary[7] == 1:
+        decimal = decimal + 1
+    print (decimal)
+    return decimal
 
 def decimal_to_binary(decimal):
     # decimal is an integer value
@@ -65,7 +80,7 @@ def decimal_to_binary(decimal):
         n16 = 1
         b = b - 16
     if b >= 8:
-        b8 = 1
+        n8 = 1
         b = b - 8
     if b >= 4:
         n4 = 1
@@ -75,8 +90,8 @@ def decimal_to_binary(decimal):
         b = b - 2
     if b >= 1:
         n1 = 1
-        b = b -1
-    binary = (n128+n64+n32+n16+n8+n4+n2+n1)
+        b = b - 1
+    binary = (n128,n64,n32,n16,n8,n4,n2,n1)
     return binary
 
 
@@ -84,24 +99,24 @@ def get_binary():
     # function should read the entry widget and generate an integer
     # this integer will be used as an input parameter for decimal to binary and the result updated
     # in the 8 checkboxes
-    decimal = decimal_to_binary(entered.get)
-    binary = binary_to_decimal(decimal)
-    binary = (binary(0) + binary(1) + binary(2) + binary(3) + binary(4) + binary(5) + binary(6) + binary(7))
-    s1.set(binary(0))
-    s2.set(binary(1))
-    s3.set(binary(2))
-    s4.set(binary(3))
-    s5.set(binary(4))
-    s6.set(binary(5))
-    s7.set(binary(6))
-    s8.set(binary(7))
+    decimal = int(entered.get())
+    binary = decimal_to_binary(decimal)
+    s1.set(binary[0])
+    s2.set(binary[1])
+    s3.set(binary[2])
+    s4.set(binary[3])
+    s5.set(binary[4])
+    s6.set(binary[5])
+    s7.set(binary[6])
+    s8.set(binary[7])
 
 def get_decimal():
     # function should read the checkboxes and generate a tuple called binary of length 8 that has 1's and 0's
     # this tuple will be used as an input parameter for binary_to_decimal and the result updated
     # in the entry box
-    binary = []
+    binary = (s1.get(),s2.get(),s3.get(),s4.get(),s5.get(),s6.get(),s7.get(),s8.get())
     decimal = binary_to_decimal(binary)
+    entered.set(decimal)
 
 
 title = tk.Label(win, text="Binary / Decimal converter", font="system")
